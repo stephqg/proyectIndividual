@@ -8,6 +8,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
@@ -21,6 +23,7 @@ public class DatosActivity extends AppCompatActivity {
     String campo;
     String correo;
     TextView textViewTitulo;
+    Button botonAgregarMensaje;
 
     RecyclerView miRecyclerView;
     ArrayList<claseDatos> claseDatosArrayList;
@@ -40,6 +43,11 @@ public class DatosActivity extends AppCompatActivity {
         textViewTitulo = findViewById(R.id.textViewCategoria);
         textViewTitulo.setText(campo);
 
+        botonAgregarMensaje = findViewById(R.id.buttonAgregarNuevo);
+        if(correo.equals("stephanyqg10@hotmail.com")){
+            botonAgregarMensaje.setVisibility(View.VISIBLE);
+        }
+
         miRecyclerView = findViewById(R.id.recyclerViewDatos);
         LinearLayoutManager layoutRecyler = new LinearLayoutManager(this);
         miRecyclerView.setLayoutManager(layoutRecyler);
@@ -48,6 +56,7 @@ public class DatosActivity extends AppCompatActivity {
         claseDatosArrayList = new ArrayList<>();
         limpiarArrayList();
         obtenerDatosFirebase(campo, correo);
+
     }
 
     public void obtenerDatosFirebase(String campo, String correo){
@@ -89,5 +98,8 @@ public class DatosActivity extends AppCompatActivity {
 
     }
 
+    public void agregarNuevo(View view){
+
+    }
 
 }

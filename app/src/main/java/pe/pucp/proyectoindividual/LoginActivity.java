@@ -102,20 +102,11 @@ public class LoginActivity extends AppCompatActivity {
 
     private void aPrincipal(FirebaseUser miUser){
 
-        if (miUser.getEmail().equals("a20151164@pucp.pe")){
-            Intent i = new Intent(this, MainActivity.class);
-            i.putExtra("email", miUser.getEmail());
-            i.putExtra("UID", miUser.getUid());
-            i.putExtra("nombreUsuario",miUser.getDisplayName());
-            startActivity(i);
-        }
-        else{
         Intent i = new Intent(this, MainActivity.class);
         i.putExtra("email", miUser.getEmail());
         i.putExtra("UID", miUser.getUid());
         i.putExtra("nombreUsuario",miUser.getDisplayName());
         startActivity(i);
-        }
     }
 
     @Override

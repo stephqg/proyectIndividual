@@ -1,8 +1,16 @@
 <resources>
     <string name="app_name">ActualízatePUCP</string>
     <string name="bienvenida">Bienvenido/a a ActualízatePUCP</string>
+    <string name="novedades">Novedades</string>
     <string name="saludoDatos">Te dejamos aquí la última información, siéntete libre de agregar fotos de alguna de estas novedades.</string>
+    <string name="editable">Editable</string>
     <string name="nombreFotos">Elige un nombre para tu foto:</string>
     <string name="ayuda">Ayuda</string>
     <string name="cerrarSesion">Cerrar Sesión</string>
+    <string name="tomarFoto">TOMAR FOTO</string>
+    <string name="nombre">Nombre</string>
+    <string name="subirFoto">SUBIR FOTO</string>
+    <string name="agregarFoto">AGREGAR FOTO</string>
+    <string name="borrar">BORRAR</string>
+    <string name="agregarMensaje">AGREGAR NUEVO</string>
 </resources>
