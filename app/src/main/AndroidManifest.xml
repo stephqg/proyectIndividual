@@ -17,13 +17,14 @@
         android:theme="@style/Theme.ProyectoIndividual">
         <activity android:name=".Foto"></activity>
         <activity android:name=".DatosActivity" />
-        <activity android:name=".LoginActivity"></activity>
-        <activity android:name=".MainActivity">
+        <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".MainActivity">
         </activity>
 
         <meta-data

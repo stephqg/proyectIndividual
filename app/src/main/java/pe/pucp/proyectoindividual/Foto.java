@@ -1,6 +1,8 @@
 package pe.pucp.proyectoindividual;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
@@ -8,9 +10,11 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -28,8 +32,8 @@ public class Foto extends AppCompatActivity {
     String campo;
     String correo;
     ImageView imageViewFoto;
+    EditText editTextnombre;
     Bitmap imagen;
-    int cantidadFotos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,16 +45,36 @@ public class Foto extends AppCompatActivity {
         correo = intent.getStringExtra("correo");
 
         imageViewFoto = findViewById(R.id.imageView);
+        editTextnombre = findViewById(R.id.etNombreFoto);
 
     }
 
-    public void tomarFoto(View view){
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    public void tomarFoto(View view) {
 
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
-                == PackageManager.PERMISSION_DENIED){
+        if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(new String[]{Manifest.permission.CAMERA}, 1000);
+        }else{
+            permisoFoto();
+        }
+
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == 1000) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                permisoFoto();
+            } else {
+                Toast.makeText(this, "No hay permisos de cámara", Toast.LENGTH_LONG).show();
+            }
+        }
+    }
+
+    public void permisoFoto(){
         Intent i = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         startActivityForResult(i, 1);
-        }
     }
 
     @Override
@@ -64,23 +88,16 @@ public class Foto extends AppCompatActivity {
 
     public void subirFotoFirebase(View view){
 
-
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference storageRef = storage.getReference();
-        StorageReference imgRef = storageRef.child(campo);
-
-        imgRef.listAll().addOnSuccessListener(new OnSuccessListener<ListResult>() {
-            @Override
-            public void onSuccess(ListResult listResult) {
-                cantidadFotos = listResult.getItems().size();
-            }
-        });
 
         ByteArrayOutputStream fotoJPG = new ByteArrayOutputStream();
         imagen.compress(Bitmap.CompressFormat.JPEG, 100, fotoJPG);
         byte cadenabytes[] = fotoJPG.toByteArray();
 
-        String nombreArchivo = correo + Integer.toString(cantidadFotos);
+        String nombreF = editTextnombre.getText().toString();
+
+        String nombreArchivo = correo + "-" +nombreF;
 
         StorageReference referenciaFinal = storageRef.child(campo + "/" + nombreArchivo);
         referenciaFinal.putBytes(cadenabytes)
@@ -88,6 +105,7 @@ public class Foto extends AppCompatActivity {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                         Toast.makeText(getApplicationContext(), "Foto subida exitosamente", Toast.LENGTH_SHORT).show();
+                        finish();
                     }
                 });
 

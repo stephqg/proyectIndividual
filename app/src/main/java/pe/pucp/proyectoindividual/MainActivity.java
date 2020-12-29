@@ -1,18 +1,24 @@
 package pe.pucp.proyectoindividual;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.firebase.ui.auth.AuthUI;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -57,6 +63,52 @@ public class MainActivity extends AppCompatActivity {
         obtenerImagenesFirebase();
 
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_principal, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.menuAyuda:
+                mostrarAyuda();
+                return true;
+            case R.id.menuLogout:
+                logOut();
+        }
+
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    public void mostrarAyuda(){
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+        alertDialog.setTitle("Ayuda sobre ActualízatePUCP");
+        alertDialog.setMessage("Esta aplicación está diseñada para que los usuarios puedan enterarse de las últimas novedades, noticias, eventos, etc. de la PUCP. " +
+                "Además, los usuarios podrán tomar fotografías de estos sucesos.");
+        alertDialog.setPositiveButton("¡Entendido!", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        alertDialog.show();
+    }
+
+    public void logOut(){
+        AuthUI instance = AuthUI.getInstance();
+        instance.signOut(this).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                finish();
+            }
+        });
+    }
+
 
     public void obtenerImagenesFirebase(){
 
