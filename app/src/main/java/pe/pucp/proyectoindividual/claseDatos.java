@@ -6,7 +6,7 @@ public class claseDatos {
     private String lugar;
     private String fecha;
 
-    public claseDatos(String titulo, String lugar, String fecha) {
+    public claseDatos() {
         this.titulo = titulo;
         this.lugar = lugar;
         this.fecha = fecha;
@@ -35,4 +35,5 @@ public class claseDatos {
     public void setFecha(String fecha) {
         this.fecha = fecha;
     }
+
 }
