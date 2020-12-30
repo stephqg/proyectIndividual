@@ -93,7 +93,7 @@ public class LoginActivity extends AppCompatActivity {
                         .setAuthMethodPickerLayout(customLayout)
                         .setAvailableProviders(proveedores)
                         .build(),
-                        9001);
+                        9002);
             }
         });
 
@@ -120,5 +120,15 @@ public class LoginActivity extends AppCompatActivity {
                     finish();
             }
         }
+
+        if (requestCode == 9002){
+            FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+            if (currentUser != null){
+                aPrincipal(currentUser);
+                finish();
+            }
+        }
+
+
     }
 }

@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "170324369531",
+    "firebase_url": "https://proyectoindividual-fa7b3-default-rtdb.firebaseio.com",
     "project_id": "proyectoindividual-fa7b3",
     "storage_bucket": "proyectoindividual-fa7b3.appspot.com"
   },
@@ -19,6 +20,14 @@
           "android_info": {
             "package_name": "pe.pucp.proyectoindividual",
             "certificate_hash": "bf2ba85109adcba7143e385ec38ebd38be303d65"
+          }
+        },
+        {
+          "client_id": "170324369531-ja6e63udvlnoam3pvqhrek2imcr0ftj1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "pe.pucp.proyectoindividual",
+            "certificate_hash": "7242b551eae484baa803b3eebafdf6faac0da7ab"
           }
         },
         {

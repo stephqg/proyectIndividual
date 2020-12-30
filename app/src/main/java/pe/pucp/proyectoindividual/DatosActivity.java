@@ -99,7 +99,9 @@ public class DatosActivity extends AppCompatActivity {
     }
 
     public void agregarNuevo(View view){
-
+        Intent i = new Intent(this, AgregarNuevoActivity.class);
+        i.putExtra("campo", campo);
+        startActivity(i);
     }
 
 }

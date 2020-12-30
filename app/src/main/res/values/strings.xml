@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">ActualízatePUCP</string>
-    <string name="bienvenida">Bienvenido/a a ActualízatePUCP</string>
+    <string name="bienvenida">¡Bienvenido/a a ActualízatePUCP!</string>
     <string name="novedades">Novedades</string>
     <string name="saludoDatos">Te dejamos aquí la última información, siéntete libre de agregar fotos de alguna de estas novedades.</string>
     <string name="editable">Editable</string>
@@ -13,4 +13,12 @@
     <string name="agregarFoto">AGREGAR FOTO</string>
     <string name="borrar">BORRAR</string>
     <string name="agregarMensaje">AGREGAR NUEVO</string>
+    <string name="autenticacion">Favor procede a registrarte para acceder a la aplicación:</string>
+    <string name="nombreTitulo">Indica el título para tu publicación:</string>
+    <string name="nombreLugar">Indica el lugar de tu publicación:</string>
+    <string name="nombreFecha">Indica la fecha de tu publicación:</string>
+    <string name="titulo">Título</string>
+    <string name="fecha">Fecha</string>
+    <string name="lugar">Lugar</string>
+    <string name="subirPubli">SUBIR PUBLICACION</string>
 </resources>

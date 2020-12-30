@@ -76,28 +76,30 @@ public class miDatosAdapter extends RecyclerView.Adapter<miDatosAdapter.miDatosH
                 public void onClick(View v) {
                     AlertDialog.Builder alertDialog = new AlertDialog.Builder(contexto);
                     alertDialog.setTitle("Eliminar Elemento");
-                    alertDialog.setTitle("¿Seguro que desea eliminar elemento?");
+                    alertDialog.setTitle("¿Seguro que desea eliminar publicación?");
                     alertDialog.setPositiveButton("Sí, eliminar", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            //Toast.makeText(contexto, "Si reacciona al botón", Toast.LENGTH_LONG).show();
-                            Toast.makeText(contexto, miClaseDatos.getTitulo(),Toast.LENGTH_SHORT).show();
                             FirebaseDatabase.getInstance().getReference().child("Datos").child(campo).orderByChild("titulo").equalTo(miClaseDatos.getTitulo())
                                     .addListenerForSingleValueEvent(new ValueEventListener() {
                                         @Override
                                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                                             for (DataSnapshot dataSnapshot : snapshot.getChildren()){
-                                                Toast.makeText(contexto,"Aqui debería borrar",Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(contexto,"Borrado exitoso",Toast.LENGTH_SHORT).show();
                                                 String key = dataSnapshot.getKey();
                                                 FirebaseDatabase.getInstance().getReference().child("Datos").child(campo).child(key).removeValue();
                                             }
                                         }
-
                                         @Override
                                         public void onCancelled(@NonNull DatabaseError error) {
-
                                         }
                                     });
+                        }
+                    });
+                    alertDialog.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            //Borrado Cancelado
                         }
                     });
                     alertDialog.show();
@@ -124,7 +126,6 @@ public class miDatosAdapter extends RecyclerView.Adapter<miDatosAdapter.miDatosH
         holder.textViewTitulo.setText(claseDatosArrayList.get(position).getTitulo());
         holder.textViewLugar.setText(claseDatosArrayList.get(position).getLugar());
         holder.textViewFecha.setText(claseDatosArrayList.get(position).getFecha());
-
     }
 
     @Override
