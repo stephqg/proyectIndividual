@@ -64,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    //ESTA SECCIÓN ES PARA CREAR Y ACCIONAR EL APP BAR
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_principal, menu);
@@ -79,8 +80,6 @@ public class MainActivity extends AppCompatActivity {
             case R.id.menuLogout:
                 logOut();
         }
-
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -108,6 +107,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+    //ESTA SECCIÓN ES PARA CREAR Y ACCIONAR EL APP BAR
 
 
     public void obtenerImagenesFirebase(){
@@ -137,7 +137,6 @@ public class MainActivity extends AppCompatActivity {
                 });
     }
 
-
     public void limpiarArrayList(){
         if (claseMainArrayList != null){
             claseMainArrayList.clear();
@@ -145,8 +144,6 @@ public class MainActivity extends AppCompatActivity {
                 miRecyclerAdapter.notifyDataSetChanged();
             }
         }
-        claseMainArrayList = new ArrayList<>();
-
     }
 
 }

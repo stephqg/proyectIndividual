@@ -44,8 +44,14 @@ public class LoginActivity extends AppCompatActivity {
 
         btnIniciar= findViewById(R.id.buttonIniciar);
         btnIniciarGoogle = findViewById(R.id.buttonIniciarGoogle);
-        configurarLogin();
 
+        FirebaseUser miUserLogeado = FirebaseAuth.getInstance().getCurrentUser();
+
+        if (miUserLogeado != null){
+            aPrincipal(miUserLogeado);
+        }else {
+            configurarLogin();
+        }
     }
 
 

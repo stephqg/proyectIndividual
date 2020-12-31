@@ -1,17 +1,23 @@
 package pe.pucp.proyectoindividual;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.firebase.ui.auth.AuthUI;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
@@ -59,6 +65,52 @@ public class DatosActivity extends AppCompatActivity {
 
     }
 
+    //ESTA SECCIÓN ES PARA CREAR Y ACCIONAR EL APP BAR
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_principal, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.menuAyuda:
+                mostrarAyuda();
+                return true;
+            case R.id.menuLogout:
+                logOut();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    public void mostrarAyuda(){
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+        alertDialog.setTitle("Ayuda sobre ActualízatePUCP");
+        alertDialog.setMessage("Esta aplicación está diseñada para que los usuarios puedan enterarse de las últimas novedades, noticias, eventos, etc. de la PUCP. " +
+                "Además, los usuarios podrán tomar fotografías de estos sucesos.");
+        alertDialog.setPositiveButton("¡Entendido!", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                //MENSAJE DE AYUDA MOSTRADO Y ACEPTADO
+            }
+        });
+        alertDialog.show();
+    }
+
+    public void logOut(){
+        AuthUI instance = AuthUI.getInstance();
+        instance.signOut(this).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                startActivity(new Intent(DatosActivity.this, LoginActivity.class));
+                finish();
+            }
+        });
+    }
+    //FIN DE CONFIG DE APP BAR
+
+
     public void obtenerDatosFirebase(String campo, String correo){
 
         FirebaseDatabase.getInstance().getReference().child("Datos").child(campo)
@@ -71,7 +123,6 @@ public class DatosActivity extends AppCompatActivity {
                             miclaseDatos.setTitulo(snapshot1.child("titulo").getValue().toString());
                             miclaseDatos.setLugar(snapshot1.child("lugar").getValue().toString());
                             miclaseDatos.setFecha(snapshot1.child("fecha").getValue().toString());
-                            Log.d("infoApp","Está entrando aquí");
                             claseDatosArrayList.add(miclaseDatos);
                         }
 
@@ -94,8 +145,6 @@ public class DatosActivity extends AppCompatActivity {
                 miRecyclerAdapter.notifyDataSetChanged();
             }
         }
-        claseDatosArrayList = new ArrayList<>();
-
     }
 
     public void agregarNuevo(View view){

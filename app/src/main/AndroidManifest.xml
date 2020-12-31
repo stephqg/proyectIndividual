@@ -3,7 +3,6 @@
     package="pe.pucp.proyectoindividual">
 
     <uses-permission android:name="android.permission.CAMERA" />
-
     <uses-permission-sdk-23 android:name="android.permission.CAMERA" />
 
     <application
@@ -16,7 +15,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ProyectoIndividual">
         <activity android:name=".AgregarNuevoActivity"></activity>
-        <activity android:name=".Foto" />
+        <activity android:name=".Foto"
+            android:screenOrientation="portrait" />
         <activity android:name=".DatosActivity" />
         <activity android:name=".LoginActivity">
             <intent-filter>

@@ -95,11 +95,9 @@ public class Foto extends AppCompatActivity {
         imagen.compress(Bitmap.CompressFormat.JPEG, 100, fotoJPG);
         byte cadenabytes[] = fotoJPG.toByteArray();
 
-        String nombreF = editTextnombre.getText().toString();
-
-        String nombreArchivo = correo + "-" +nombreF;
-
+        String nombreArchivo = correo + "-" + editTextnombre.getText().toString();
         StorageReference referenciaFinal = storageRef.child(campo + "/" + nombreArchivo);
+
         referenciaFinal.putBytes(cadenabytes)
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
